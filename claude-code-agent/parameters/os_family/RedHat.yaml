@@ -14,13 +14,7 @@
 values:
   config:
     managed-settings.d/permissions.json: |-
-      {
-        "permissions": {
-          "deny": [
-            "Bash(rm -rf *)"
-          ]
-        }
-      }
+      {)
     managed-settings.json: '{}'
     root_dir: /etc/claude-code
   install_method: script
