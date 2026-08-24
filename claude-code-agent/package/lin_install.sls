@@ -25,13 +25,15 @@ Download Claude Code Install Script:
 Execute Claude Code Install Script:
   cmd.run:
     - creates: {{ script_cfg.creates }}
+{%- if script_cfg.get('env') %}
+    - env: {{ script_cfg.env | json }}
+{%- endif %}
     - name: {{ script_cfg.target }}
     - require:
       - file: Download Claude Code Install Script
       - pkg: Install Claude Code Agent OS Dependencies
 
 {%- elif claude_code_agent.install_method == 'npm' %}
-
 Install Claude Code Npm Package:
   npm.installed:
     - name: {{ claude_code_agent.pkg.npm.name }}
@@ -45,7 +47,6 @@ Install Nodejs Package:
       - pkg: Install Claude Code Agent OS Dependencies
 
 {%- elif claude_code_agent.install_method == 'rpm' %}
-
 Emit The Not Supported Message:
   test.fail_without_changes:
     - name: 'RPM-based installation not yet supported'
