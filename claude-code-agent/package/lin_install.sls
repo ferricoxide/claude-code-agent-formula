@@ -6,25 +6,26 @@
       with context %}
 
 {%- if claude_code_agent.install_method == 'script' %}
+  {%- set script_cfg = claude_code_agent.install_script %}
 
 Download Claude Code Install Script:
   file.managed:
-    - group: {{ claude_code_agent.install_script.group }}
-    - mode: '{{ claude_code_agent.install_script.mode }}'
-    - name: {{ claude_code_agent.install_script.target }}
+    - group: {{ script_cfg.group }}
+    - mode: '{{ script_cfg.mode }}'
+    - name: {{ script_cfg.target }}
     - require:
       - pkg: Install Claude Code Agent OS Dependencies
-    - skip_verify: {{ claude_code_agent.install_script.skip_verify }}
-    - source: {{ claude_code_agent.install_script.source }}
-{%- if claude_code_agent.install_script.source_hash %}
-    - source_hash: {{ claude_code_agent.install_script.source_hash }}
+    - skip_verify: {{ script_cfg.get('skip_verify', True) }}
+    - source: {{ script_cfg.source }}
+{%- if script_cfg.source_hash %}
+    - source_hash: {{ script_cfg.source_hash }}
 {%- endif %}
-    - user: {{ claude_code_agent.install_script.user }}
+    - user: {{ script_cfg.user }}
 
 Execute Claude Code Install Script:
   cmd.run:
-    - creates: {{ claude_code_agent.install_script.creates }}
-    - name: {{ claude_code_agent.install_script.target }}
+    - creates: {{ script_cfg.creates }}
+    - name: {{ script_cfg.target }}
     - require:
       - file: Download Claude Code Install Script
       - pkg: Install Claude Code Agent OS Dependencies
