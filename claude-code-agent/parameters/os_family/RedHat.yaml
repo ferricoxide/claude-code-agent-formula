@@ -16,6 +16,8 @@ values:
   install_method: script
   install_script:
     creates: /usr/local/bin/claude
+    env:
+      CLAUDE_INSTALL_ALLOW_SUDO: '1'
     group: root
     mode: '0755'
     skip_verify: true
