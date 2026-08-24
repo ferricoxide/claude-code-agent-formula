@@ -37,7 +37,7 @@ Execute Claude Code Install Script:
 Relocate Claude Code To Global Location:
   cmd.run:
     - name: |
-        REAL_BIN=$( readlink -f {{ paths.root_bin }} )
+        REAL_BIN=$(readlink -f {{ paths.root_bin }})
         TARGET_DIR={{ paths.global_share }}
         rm -rf "$TARGET_DIR"
         mv {{ paths.root_share }} "$TARGET_DIR"
@@ -65,10 +65,24 @@ Install Nodejs Package:
       - pkg: Install Claude Code Agent OS Dependencies
 
 {%- elif claude_code_agent.install_method == 'rpm' %}
+{%-   set repo_cfg = claude_code_agent.repo %}
 
-Emit The Not Supported Message:
-  test.fail_without_changes:
-    - name: 'RPM-based installation not yet supported'
+Configure Claude Code Repository:
+  pkgrepo.managed:
+    - baseurl: {{ repo_cfg.baseurl }}
+    - enabled: {{ repo_cfg.enabled }}
+    - file: {{ repo_cfg.file }}
+    - gpgcheck: {{ repo_cfg.gpgcheck }}
+    - gpgkey: {{ repo_cfg.gpgkey }}
+    - humanname: {{ repo_cfg.humanname }}
+    - name: {{ repo_cfg.name }}
+
+Install Claude Code Rpm Package:
+  pkg.installed:
+    - name: {{ claude_code_agent.pkg.rpm.name }}
+    - require:
+      - pkgrepo: Configure Claude Code Repository
+
 {%- endif %}
 
 Install Claude Code Agent OS Dependencies:
