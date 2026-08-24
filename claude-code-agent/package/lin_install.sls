@@ -64,6 +64,20 @@ Install Nodejs Package:
     - require:
       - pkg: Install Claude Code Agent OS Dependencies
 
+Manage Claude Code Npm Permissions:
+  file.directory:
+    - dir_mode: '0755'
+    - file_mode: '0755'
+    - group: root
+    - name: {{ claude_code_agent.path.npm_share }}
+    - recurse:
+      - group
+      - mode
+      - user
+    - require:
+      - npm: Install Claude Code Npm Package
+    - user: root
+
 {%- elif claude_code_agent.install_method == 'rpm' %}
 {%-   set repo_cfg = claude_code_agent.repo %}
 
