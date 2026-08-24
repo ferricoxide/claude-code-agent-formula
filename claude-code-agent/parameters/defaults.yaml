@@ -5,9 +5,19 @@
 ---
 values:
   config: ''
+  install_method: script
+  install_script:
+    creates: ''
+    group: ''
+    mode: ''
+    source: ''
+    source_hash: null
+    target: ''
+    user: ''
   pkg:
+    deps: []
     nodejs:
-      name: nodejs
+      name: ''
     npm:
-      name: '@anthropic-ai/claude-code'
+      name: ''
 ...
