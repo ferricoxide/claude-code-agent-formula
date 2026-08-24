@@ -16,9 +16,11 @@ values:
     source_hash: null
     target: ''
     user: ''
+  manage_repo: true
   path:
     global_bin: ''
     global_share: ''
+    npm_share: ''
     root_bin: ''
     root_share: ''
   pkg:
@@ -37,4 +39,5 @@ values:
     gpgkey: ''
     humanname: ''
     name: ''
+    skip_if_unavailable: true
 ...

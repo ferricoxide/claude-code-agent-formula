@@ -25,9 +25,11 @@ values:
     source_hash: null
     target: /tmp/claude_code_install.sh
     user: root
+  manage_repo: true
   path:
     global_bin: /usr/local/bin/claude
     global_share: /usr/local/share/claude
+    npm_share: /usr/local/lib/node_modules/@anthropic-ai
     root_bin: /root/.local/bin/claude
     root_share: /root/.local/share/claude
   pkg:
@@ -52,4 +54,5 @@ values:
     gpgkey: https://downloads.claude.ai/keys/claude-code.asc
     humanname: Claude Code
     name: claude-code
+    skip_if_unavailable: true
 ...
