@@ -12,7 +12,10 @@
 # values: {}
 ---
 values:
+  config: /etc/claude_code.conf
   pkg:
-    name: claude-code-agent-redhat
-  config: /etc/claude-code-agent.conf
+    nodejs:
+      name: nodejs
+    npm:
+      name: '@anthropic-ai/claude-code'
 ...

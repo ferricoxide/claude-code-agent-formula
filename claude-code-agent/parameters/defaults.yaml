@@ -4,15 +4,10 @@
 # Set default values.
 ---
 values:
+  config: ''
   pkg:
-    name: claude-code-agent
-  rootgroup: root
-  config: '/etc/claude-code-agent'
-  service:
-    name: claude-code-agent
-  subcomponent:
-    config: '/etc/claude-code-agent-subcomponent-formula.conf'
-  # Just here for testing
-  added_in_defaults: defaults_value
-  winner: defaults
+    nodejs:
+      name: nodejs
+    npm:
+      name: '@anthropic-ai/claude-code'
 ...

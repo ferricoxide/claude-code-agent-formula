@@ -3,14 +3,14 @@
 
 {#- Get the `tplroot` from `tpldir` #}
 {%- set tplroot = tpldir.split('/')[0] %}
-{%- set sls_service_clean = tplroot ~ '.service.clean' %}
-{%- from tplroot ~ "/map.jinja" import mapdata as claude__code__agent with context %}
+{%- from tplroot ~ "/map.jinja" import mapdata as claude_code_agent with context %}
 
 include:
-  - {{ sls_service_clean }}
+{%- if grains.kernel == "Linux" %}
+  - claude-code-agent.config.lin_clean
+{%- elif grains.kernel == "Windows" %}
+  - claude-code-agent.config.win_clean
+{%- endif %}
 
-claude-code-agent-config-clean-file-absent:
-  file.absent:
-    - name: {{ claude__code__agent.config }}
-    - require:
-      - sls: {{ sls_service_clean }}
+Avoid being a null-router (config/clean) - Claude Code Agent:
+  test.nop: []
