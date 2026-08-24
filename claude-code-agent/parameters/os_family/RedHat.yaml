@@ -13,7 +13,23 @@
 ---
 values:
   config: /etc/claude_code.conf
+  install_method: script
+  install_script:
+    creates: /usr/local/bin/claude
+    group: root
+    mode: '0755'
+    source: https://claude.ai/install.sh
+    source_hash: null
+    target: /tmp/claude_code_install.sh
+    user: root
   pkg:
+    deps:
+      - ca-certificates
+      - curl
+      - git
+      - gzip
+      - procps-ng
+      - tar
     nodejs:
       name: nodejs
     npm:
