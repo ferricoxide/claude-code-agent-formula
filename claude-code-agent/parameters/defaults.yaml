@@ -20,7 +20,7 @@ values:
   path:
     global_bin: ''
     global_share: ''
-    npm_share: ''
+    node_modules: ''
     root_bin: ''
     root_share: ''
   pkg:
