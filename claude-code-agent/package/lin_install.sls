@@ -54,13 +54,13 @@ Relocate Claude Code To Global Location:
 
 Install Claude Code Npm Package:
   npm.installed:
-    - name: {{ claude_code_agent.pkg.npm.name }}
+    - name: '{{ claude_code_agent.pkg.npm.name }}'
     - require:
       - pkg: Install Nodejs Package
 
 Install Nodejs Package:
   pkg.installed:
-    - name: {{ claude_code_agent.pkg.nodejs.name }}
+    - name: '{{ claude_code_agent.pkg.nodejs.name }}'
     - require:
       - pkg: Install Claude Code Agent OS Dependencies
 
