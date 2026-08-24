@@ -27,4 +27,14 @@ values:
       name: ''
     npm:
       name: ''
+    rpm:
+      name: ''
+  repo:
+    baseurl: ''
+    enabled: '1'
+    file: ''
+    gpgcheck: '1'
+    gpgkey: ''
+    humanname: ''
+    name: ''
 ...

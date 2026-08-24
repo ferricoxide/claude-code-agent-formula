@@ -42,4 +42,14 @@ values:
       name: nodejs
     npm:
       name: '@anthropic-ai/claude-code'
+    rpm:
+      name: claude-code
+  repo:
+    baseurl: https://downloads.claude.ai/claude-code/rpm/stable
+    enabled: '1'
+    file: /etc/yum.repos.d/claude-code.repo
+    gpgcheck: '1'
+    gpgkey: https://downloads.claude.ai/keys/claude-code.asc
+    humanname: Claude Code
+    name: claude-code
 ...
