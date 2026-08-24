@@ -6,7 +6,8 @@
       with context %}
 
 {%- if claude_code_agent.install_method == 'script' %}
-  {%- set script_cfg = claude_code_agent.install_script %}
+{%-   set paths = claude_code_agent.path %}
+{%-   set script_cfg = claude_code_agent.install_script %}
 
 Download Claude Code Install Script:
   file.managed:
@@ -33,7 +34,24 @@ Execute Claude Code Install Script:
       - file: Download Claude Code Install Script
       - pkg: Install Claude Code Agent OS Dependencies
 
+Relocate Claude Code To Global Location:
+  cmd.run:
+    - name: |
+        REAL_BIN=$( readlink -f {{ paths.root_bin }} )
+        TARGET_DIR={{ paths.global_share }}
+        rm -rf "$TARGET_DIR"
+        mv {{ paths.root_share }} "$TARGET_DIR"
+        chmod -R 0755 "$TARGET_DIR"
+        REL_PATH="${REAL_BIN#/root/.local/share/claude/}"
+        ln -sf "$TARGET_DIR/$REL_PATH" {{ paths.global_bin }}
+        rm -f {{ paths.root_bin }}
+    - onchanges:
+      - cmd: Execute Claude Code Install Script
+    - require:
+      - cmd: Execute Claude Code Install Script
+
 {%- elif claude_code_agent.install_method == 'npm' %}
+
 Install Claude Code Npm Package:
   npm.installed:
     - name: {{ claude_code_agent.pkg.npm.name }}
@@ -47,6 +65,7 @@ Install Nodejs Package:
       - pkg: Install Claude Code Agent OS Dependencies
 
 {%- elif claude_code_agent.install_method == 'rpm' %}
+
 Emit The Not Supported Message:
   test.fail_without_changes:
     - name: 'RPM-based installation not yet supported'
