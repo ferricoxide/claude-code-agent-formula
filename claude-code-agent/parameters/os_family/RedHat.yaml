@@ -18,6 +18,7 @@ values:
     creates: /usr/local/bin/claude
     group: root
     mode: '0755'
+    skip_verify: true
     source: https://claude.ai/install.sh
     source_hash: null
     target: /tmp/claude_code_install.sh
