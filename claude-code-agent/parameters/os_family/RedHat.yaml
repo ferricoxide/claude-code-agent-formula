@@ -25,6 +25,11 @@ values:
     source_hash: null
     target: /tmp/claude_code_install.sh
     user: root
+  path:
+    global_bin: /usr/local/bin/claude
+    global_share: /usr/local/share/claude
+    root_bin: /root/.local/bin/claude
+    root_share: /root/.local/share/claude
   pkg:
     deps:
       - ca-certificates
