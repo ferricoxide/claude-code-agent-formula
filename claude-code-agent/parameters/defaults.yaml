@@ -4,7 +4,8 @@
 # Set default values.
 ---
 values:
-  config: ''
+  config:
+    root_dir: /etc/claude-code
   install_method: script
   install_script:
     creates: ''
