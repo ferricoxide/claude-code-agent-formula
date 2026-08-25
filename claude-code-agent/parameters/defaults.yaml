@@ -5,7 +5,13 @@
 ---
 values:
   config:
-    root_dir: /etc/claude-code
+    managed-settings.json: |-
+      {
+          "env": {
+              "ANTHROPIC_BASE_URL": "https://api.anthropic.com"
+          },
+          "parentSettingsBehavior": "merge"
+      }
   install_method: script
   install_script:
     creates: ''

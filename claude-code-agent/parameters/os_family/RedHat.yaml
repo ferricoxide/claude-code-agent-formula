@@ -15,7 +15,6 @@ values:
   config:
     managed-settings.d/permissions.json: |-
       {)
-    managed-settings.json: '{}'
     root_dir: /etc/claude-code
   install_method: script
   install_script:
