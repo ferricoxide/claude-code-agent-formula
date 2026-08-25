@@ -4,10 +4,41 @@
 # Set default values.
 ---
 values:
-  config: ''
+  config:
+    root_dir: /etc/claude-code
+  install_method: script
+  install_script:
+    creates: ''
+    env: {}
+    group: ''
+    mode: ''
+    skip_verify: true
+    source: ''
+    source_hash: null
+    target: ''
+    user: ''
+  manage_repo: true
+  path:
+    global_bin: ''
+    global_share: ''
+    node_modules: ''
+    root_bin: ''
+    root_share: ''
   pkg:
+    deps: []
     nodejs:
-      name: nodejs
+      name: ''
     npm:
-      name: '@anthropic-ai/claude-code'
+      name: ''
+    rpm:
+      name: ''
+  repo:
+    baseurl: ''
+    enabled: '1'
+    file: ''
+    gpgcheck: '1'
+    gpgkey: ''
+    humanname: ''
+    name: ''
+    skip_if_unavailable: true
 ...

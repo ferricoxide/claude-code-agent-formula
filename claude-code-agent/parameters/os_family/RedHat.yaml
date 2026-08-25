@@ -12,10 +12,51 @@
 # values: {}
 ---
 values:
-  config: /etc/claude_code.conf
+  config:
+    managed-settings.d/permissions.json: |-
+      {)
+    managed-settings.json: '{}'
+    root_dir: /etc/claude-code
+  install_method: script
+  install_script:
+    creates: /usr/local/bin/claude
+    env:
+      CLAUDE_INSTALL_ALLOW_SUDO: '1'
+    group: root
+    mode: '0755'
+    skip_verify: true
+    source: https://claude.ai/install.sh
+    source_hash: null
+    target: /tmp/claude_code_install.sh
+    user: root
+  manage_repo: true
+  path:
+    global_bin: /usr/local/bin/claude
+    global_share: /usr/local/share/claude
+    node_modules: /usr/local/lib/node_modules
+    root_bin: /root/.local/bin/claude
+    root_share: /root/.local/share/claude
   pkg:
+    deps:
+      - ca-certificates
+      - curl
+      - git
+      - gzip
+      - procps-ng
+      - tar
     nodejs:
       name: nodejs
     npm:
       name: '@anthropic-ai/claude-code'
+    rpm:
+      name: claude-code
+  repo:
+    baseurl: https://downloads.claude.ai/claude-code/rpm/stable
+    enabled: '1'
+    file: /etc/yum.repos.d/claude-code.repo
+    gpgcheck: '1'
+    gpgkey: https://downloads.claude.ai/keys/claude-code.asc
+    humanname: Claude Code
+    name: claude-code
+    skip_if_unavailable: true
 ...
