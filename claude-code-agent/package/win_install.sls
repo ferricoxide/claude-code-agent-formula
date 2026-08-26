@@ -39,12 +39,12 @@ Stage Claude Code Helper Script:
 {%- elif claude_code_agent.install_method == 'npm' %}
 Verify NPM Executable Presence:
   cmd.run:
-    - name: >-
-        powershell -ExecutionPolicy Bypass -Command
-        "if (-not (Get-Command npm -ErrorAction SilentlyContinue)) {
-            Write-Error 'NPM executable not found in PATH. Ensure Node.js/NPM is pre-installed.';
+    - name: |
+        $env:Path = [Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [Environment]::GetEnvironmentVariable("Path", "User")
+        if (-not (Get-Command npm -ErrorAction SilentlyContinue) -and -not (Test-Path "C:\Program Files\nodejs\npm.cmd")) {
+            Write-Error "NPM executable not found in PATH or standard Node.js directory. Ensure Node.js/NPM is pre-installed."
             exit 1
-        }"
+        }
     - shell: powershell
 
 Install Claude Code Npm Package:
