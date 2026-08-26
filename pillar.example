@@ -1,65 +1,38 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
----
 # ==============================================================================
 # Claude Code Agent Formula Pillar Configuration Example
 # ==============================================================================
-# This file maps the parameters available to customize the Claude Code agent
-# installation, system execution paths, and managed settings on minions.
-# ==============================================================================
 
 claude-code-agent:
-
   # ============================================================================
   # MANAGED AGENT CONFIGURATION DIRECTIVES (config)
   # ============================================================================
   config:
-
-    # --- Managed Settings Files -----------------------------------------------
-    # Keys under 'config' (except 'root_dir') map to relative file paths created
-    # inside 'root_dir'. Multi-line JSON strings define global system policies.
-
-    # Main, system-wide setting governing Claude Code coding-assistan agent's
-    # configuration
     managed-settings.json: |-
       {
-        "forceLoginGatewayUrl": "https://claude-gateway.example.com",
-        "forceLoginMethod": "gateway",
+        "env": {
+          "ANTHROPIC_BASE_URL": "https://api.anthropic.com"
+          "ANTHROPIC_API_KEY": "<YOUR_API_TOKEN_KEY_HERE>"
+        },
         "parentSettingsBehavior": "merge"
       }
-
-    # The `managed-settings.d` directory is generally only used if one wishes
-    # to avoid creating an overly-long, monolithic
-    # `/etc/claude-code/managed-settings.json` file. The file name (and its
-    # contents) are purely for illustrative purposes.
-    managed-settings.d/permissions.json: |-
+    managed-settings.d/api_token.json: |-
       {
-        "permissions": {
-          "deny": [
-            "Bash(rm -rf *)"
-          ]
-        }
       }
-
-    # --- Configuration Root Path ----------------------------------------------
-    # Target base directory where managed settings trees are rendered.
+    # Linux target root directory
     root_dir: '/etc/claude-code'
-
+    # Windows target root directory override
+    # root_dir: 'C:\ProgramData\claude-code'
 
   # ============================================================================
-  # B. PACKAGING & INSTALLATION DIRECTIVES
+  # PACKAGING & INSTALLATION DIRECTIVES
   # ============================================================================
+  # Primary deployment strategy selector: 'npm', 'rpm', or 'script'.
+  # Default on Linux and Windows is 'script'.
+  install_method: 'npm'
 
-  # Primary deployment strategy selector: 'npm', 'rpm' or 'script'. Because the
-  # vendor's preferred method is to use their installer-script, # 'script' is
-  # the default method. This method will only work for installation-targets that
-  # can do unrestricted pulls from from the public Internet.
-  install_method: 'rpm'
-
-  # Script-Based Installation Settings (install_method: script):
-  #   Overriding the default values, here, is not expected to work without
-  #   significant effort refactoring the "official" installer-script maintained
-  #   by Anthropic
+  # Script-Based Installation Settings (install_method: script)
   install_script:
     creates: '/usr/local/bin/claude'
     env:
@@ -67,57 +40,13 @@ claude-code-agent:
     group: 'root'
     mode: '0755'
     skip_verify: false
-    source: 'https://internal-repo.example.com/claude/install.sh'
-    source_hash: >-
-      sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    source: 'https://claude.ai/install.sh'
     target: '/tmp/claude_code_install.sh'
     user: 'root'
 
-  # Package Repository Settings (install_method: rpm)
-  #   This section meant to illustrate the types of settings-overrides necessary
-  #   if using an RPM repository not managed by Anthropic. The 'rpm' method-
-  #   supporting settings default to the Anthropic-managed `yum` repository.
-  repo:
-    baseurl: 'https://internal-mirror.example.com/claude-code/rpm/stable'
-    enabled: '1'
-    file: '/etc/yum.repos.d/claude-code.repo'
-    gpgcheck: '1'
-    gpgkey: 'https://internal-mirror.example.com/keys/claude-code.asc'
-    humanname: 'Internal Claude Code Repository'
-    name: 'claude-code'
-    skip_if_unavailable: true
-
-  # Repository Control Flags:
-  #   Toggle creation of the local YUM/DNF repository file for RPM
-  #   installations.
-  manage_repo: true
-
-  # System Execution & Storage Paths
-  #   Typically not overridden. These values support using the Anthropic-managed
-  #   installer-script and its default behaviors.
-  path:
-    global_bin: '/usr/local/bin/claude'
-    global_share: '/usr/local/share/claude'
-    node_modules: '/usr/local/lib/node_modules'
-    root_bin: '/root/.local/bin/claude'
-    root_share: '/root/.local/share/claude'
-
-  # Package Dependencies & Module Identifiers
-  #   RPMs that the agent the Claude Code coding-assistant agent will need in
-  #   order to function as expected on a RHEL-based linux distribution. It's
-  #   unlikely that these will need to be overridden.
+  # Package Dependency & Module Identifiers
   pkg:
-    deps:
-      - 'ca-certificates'
-      - 'curl'
-      - 'git'
-      - 'gzip'
-      - 'procps-ng'
-      - 'tar'
-    nodejs:
-      name: 'nodejs'
     npm:
       name: '@anthropic-ai/claude-code'
     rpm:
       name: 'claude-code'
-

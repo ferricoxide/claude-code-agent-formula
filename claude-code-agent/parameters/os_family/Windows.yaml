@@ -1,0 +1,21 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+values:
+  config:
+    managed-settings.d/permissions.json: |-
+      {
+      }
+    root_dir: 'C:\ProgramData\claude-code'
+  install_method: 'script'
+  install_script:
+    creates: 'C:\Program Files\Claude Code\claude.exe'
+    env: {}
+    skip_verify: true
+    source: 'https://claude.ai/install.ps1'
+    target: 'C:\Windows\Temp\install_claude.ps1'
+  path:
+    global_bin: 'C:\Program Files\Claude Code\claude.exe'
+    global_share: 'C:\Program Files\Claude Code'
+  pkg:
+    npm:
+      name: '@anthropic-ai/claude-code'

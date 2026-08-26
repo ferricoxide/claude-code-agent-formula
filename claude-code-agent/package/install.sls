@@ -12,5 +12,5 @@ include:
   - claude-code-agent.package.win_install
 {%- endif %}
 
-Avoid being a null-router (package/install) - Claud Code Agent:
+Avoid being a null-router (package/install) - Claude Code Agent:
   test.nop: []

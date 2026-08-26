@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 0.1.1
+
+**Released**: 2026.08.26
+
+*   Added Windows operating environment functionality
+    *   Supports dual installation methods (`install_method: script` and `install_method: npm`):
+        *   `script`: Installs via native installer (`install.ps1`) and helper staging script (`install_claude_helper.ps1`) to `C:\Program Files\Claude Code`.
+        *   `npm`: Installs global package `@anthropic-ai/claude-code` via Node.js/NPM. Includes a pre-flight execution check for `npm.cmd`.
+    *   Configures system environment and shell integration:
+        *   Dynamically maps Public Desktop and Start Menu shortcuts (`Claude Code.lnk`) based on selected installation method (`claude.exe` vs `claude.cmd`).
+        *   Manages system `PATH` and ACL hardening (`BUILTIN\Users` read/execute) for script installs.
+    *   Installs the Claude Code coding-agent configuration files under `C:\ProgramData\claude-code\managed-settings.json` and `C:\ProgramData\claude-code\managed-settings.d`.
+    *   Implements Windows cleanup states (`win_clean.sls`) to cleanly remove shortcuts, package registrations, binary directories, and configuration trees.
+
 ### 0.1.0
 
 **Released**: 2026.08.25

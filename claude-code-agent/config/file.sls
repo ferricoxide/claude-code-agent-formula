@@ -13,10 +13,7 @@ include:
   - claude-code-agent.config.lin_file
 {%- elif grains.kernel == "Windows" %}
   - claude-code-agent.config.win_file
-  {%- if enforce_hardening %}
-  - claude-code-agent.config.win_harden
-  {%- endif %}
 {%- endif %}
 
-Avoid Being A Null Router Config File:
+Avoid being a null-router (config/file) - Claude Code Agent:
   test.nop: []

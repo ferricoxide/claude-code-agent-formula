@@ -7,7 +7,7 @@ It is primarily expected that this formula will be run via [P3](https://www.plus
 
 This formula is able to install the Claude Code coding-assistant utility on Linux and Windows Server operating environments. Installation for internet-connected systems may be done using:
 * Vendor-provided installation-scripts
-* Vendor-provided install-packages
+* Vendor-provided install-packages (RHEL-based distros only)
 * NPM-based install
 
 The Claude Code coding-assistant updates _frequently_. Sites that wish to use a specific version of the Claude Code coding-assistant will need to specifically-target that associated install-content, possibly even to the degree that they will need to self-host it.
@@ -50,7 +50,16 @@ Executes _just_ the `config` state to uninstall the Claude Code coding-assistant
 
 ## Compatibility Notes:
 
+If selecting the NPM-based installation-method, it is _critical_ that an appropriate version[^1} of the `npm` utility is installed and that the formula is able to locate it.
+
 ### Linux
+
+While there RPM packagings of the Claude Code coding-assistant agent available from OpenAI, these packagings typically run behind what gets installed via either the official BASH-based installer script or the NPM repositories.
 
 
 ### Windows
+
+1. As of this README's writing, this project's contents only install the Claude Code coding-assistant agent's TUI interface. The GUI's installer does not function well in the "session 0" scope that this formula operates under. It has, therefore, been omitted from this project.
+1. While there are installable packagings of the Claude Code coding-assistant agent available from OpenAI, these packagings do not function well in the "session 0" scope that this formula operates under. Further, these packagings mostly expect to be installed on a per-user basis while the focus of this project is system-wide installation. Therefore, package-based installs are not supported by this project for Windows-based targets.
+
+[^1]: As of this document's writing, the latest-available version of NodeJS is v26.8.0. This fersion is not compatible with SaltStack 3007 currently expected by this formula. It is recommended to use NodeJS v22 LTS: this automation was tested with v22.14.0
