@@ -9,13 +9,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 **Released**: 2026.08.26
 
 *   Added Windows operating environment functionality
-    *   Installs the Claude Code coding-agent binaries on Windows via native script installation and helper PowerShell staging script (`install_claude_helper.ps1`).
+    *   Supports dual installation methods (`install_method: script` and `install_method: npm`):
+        *   `script`: Installs via native installer (`install.ps1`) and helper staging script (`install_claude_helper.ps1`) to `C:\Program Files\Claude Code`.
+        *   `npm`: Installs global package `@anthropic-ai/claude-code` via Node.js/NPM. Includes a pre-flight execution check for `npm.cmd`.
     *   Configures system environment and shell integration:
-        *   Adds installation directory (`C:\Program Files\Claude Code`) to system `PATH`.
-        *   Creates Public Desktop and Start Menu shortcuts (`Claude Code.lnk`).
-        *   Applies Windows ACLs permitting unprivileged standard users (`BUILTIN\Users`) read and execute access.
+        *   Dynamically maps Public Desktop and Start Menu shortcuts (`Claude Code.lnk`) based on selected installation method (`claude.exe` vs `claude.cmd`).
+        *   Manages system `PATH` and ACL hardening (`BUILTIN\Users` read/execute) for script installs.
     *   Installs the Claude Code coding-agent configuration files under `C:\ProgramData\claude-code\managed-settings.json`.
-    *   Implements Windows "cleanup" states (`win_clean.sls`) to remove shortcuts, path entries, binary installations, staged helper scripts, and managed configuration trees.
+    *   Implements Windows cleanup states (`win_clean.sls`) to cleanly remove shortcuts, package registrations, binary directories, and configuration trees.
 
 ### 0.1.0
 
