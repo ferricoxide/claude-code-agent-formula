@@ -4,11 +4,6 @@ values:
   config:
     managed-settings.d/permissions.json: |-
       {
-        "permissions": {
-          "deny": [
-            "Bash(rm -rf *)"
-          ]
-        }
       }
     root_dir: 'C:\ProgramData\claude-code'
   install_method: 'script'
