@@ -6,14 +6,14 @@ values:
       {
       }
     root_dir: 'C:\ProgramData\claude-code'
-  install_method: 'npm'
+  install_method: 'script'
+  install_script:
+    creates: 'C:\Program Files\Claude Code\claude.exe'
+    env:
+      CLAUDE_INSTALL_DIR: 'C:\Program Files\Claude Code'
+    skip_verify: true
+    source: 'https://claude.ai/install.ps1'
+    target: 'C:\Windows\Temp\install_claude.ps1'
   path:
-    global_bin: 'C:\Program Files\nodejs\claude.cmd'
+    global_bin: 'C:\Program Files\Claude Code\claude.exe'
     global_share: 'C:\Program Files\Claude Code'
-    node_modules: 'C:\Program Files\nodejs\node_modules'
-  pkg:
-    deps: []
-    nodejs:
-      name: 'nodejs'
-    npm:
-      name: '@anthropic-ai/claude-code'
