@@ -3,6 +3,7 @@
 {%- set tplroot = tpldir.split('/')[0] %}
 {%- from tplroot ~ "/map.jinja" import mapdata as claude_code_agent
       with context %}
+
 {%- if claude_code_agent.install_method == 'script' %}
   {%- set paths = claude_code_agent.path %}
   {%- set script_cfg = claude_code_agent.install_script %}
@@ -35,4 +36,20 @@ Stage Claude Code Helper Script:
     - makedirs: true
     - name: 'C:\Windows\Temp\install_claude_helper.ps1'
     - source: salt://claude-code-agent/files/install_claude_helper.ps1
+{%- elif claude_code_agent.install_method == 'npm' %}
+Verify NPM Executable Presence:
+  cmd.run:
+    - name: >-
+        powershell -ExecutionPolicy Bypass -Command
+        "if (-not (Get-Command npm -ErrorAction SilentlyContinue)) {
+            Write-Error 'NPM executable not found in PATH. Ensure Node.js/NPM is pre-installed.';
+            exit 1
+        }"
+    - shell: powershell
+
+Install Claude Code Npm Package:
+  npm.installed:
+    - name: '{{ claude_code_agent.pkg.npm.name }}'
+    - require:
+      - cmd: Verify NPM Executable Presence
 {%- endif %}

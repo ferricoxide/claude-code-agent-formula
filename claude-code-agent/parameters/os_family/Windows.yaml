@@ -16,3 +16,6 @@ values:
   path:
     global_bin: 'C:\Program Files\Claude Code\claude.exe'
     global_share: 'C:\Program Files\Claude Code'
+  pkg:
+    npm:
+      name: '@anthropic-ai/claude-code'
