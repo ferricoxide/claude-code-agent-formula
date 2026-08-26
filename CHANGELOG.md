@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### 0.1.1
+
+**Released**: 2026.08.26
+
+*   Added Windows operating environment functionality
+    *   Installs the Claude Code coding-agent binaries on Windows via native script installation and helper PowerShell staging script (`install_claude_helper.ps1`).
+    *   Configures system environment and shell integration:
+        *   Adds installation directory (`C:\Program Files\Claude Code`) to system `PATH`.
+        *   Creates Public Desktop and Start Menu shortcuts (`Claude Code.lnk`).
+        *   Applies Windows ACLs permitting unprivileged standard users (`BUILTIN\Users`) read and execute access.
+    *   Installs the Claude Code coding-agent configuration files under `C:\ProgramData\claude-code\managed-settings.json`.
+    *   Implements Windows "cleanup" states (`win_clean.sls`) to remove shortcuts, path entries, binary installations, staged helper scripts, and managed configuration trees.
+
 ### 0.1.0
 
 **Released**: 2026.08.25
