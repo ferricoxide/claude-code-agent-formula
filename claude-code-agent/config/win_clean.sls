@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 {%- set tplroot = tpldir.split('/')[0] %}
-{%- from tplroot ~ "/map.jinja" import mapdata as claude_code_agent
-      with context %}
+{%- from tplroot ~ "/map.jinja" import mapdata as claude_code_agent with context %}
 {%- set cfg = claude_code_agent.get('config', {}) %}
 {%- set root_dir = cfg.get('root_dir', 'C:\ProgramData\claude-code') %}
 {%- set start_dir = 'C:\ProgramData\Microsoft\Windows\Start Menu' %}
 {%- set start_lnk = start_dir ~ '\Programs\Claude Code.lnk' %}
-{%- if cfg %}
 
+{%- if cfg %}
 Remove Claude Code Configuration Directory:
   file.absent:
     - name: '{{ root_dir }}'
@@ -22,6 +21,8 @@ Remove Claude Code Start Menu Shortcut:
   file.absent:
     - name: '{{ start_lnk }}'
 
+{%- if claude_code_agent.install_method == 'script' %}
 Remove Claude Code System Path:
   win_path.absent:
     - name: '{{ claude_code_agent.path.global_share }}'
+{%- endif %}
