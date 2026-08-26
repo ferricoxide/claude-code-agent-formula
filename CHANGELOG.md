@@ -15,7 +15,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
     *   Configures system environment and shell integration:
         *   Dynamically maps Public Desktop and Start Menu shortcuts (`Claude Code.lnk`) based on selected installation method (`claude.exe` vs `claude.cmd`).
         *   Manages system `PATH` and ACL hardening (`BUILTIN\Users` read/execute) for script installs.
-    *   Installs the Claude Code coding-agent configuration files under `C:\ProgramData\claude-code\managed-settings.json`.
+    *   Installs the Claude Code coding-agent configuration files under `C:\ProgramData\claude-code\managed-settings.json` and `C:\ProgramData\claude-code\managed-settings.d`.
     *   Implements Windows cleanup states (`win_clean.sls`) to cleanly remove shortcuts, package registrations, binary directories, and configuration trees.
 
 ### 0.1.0
