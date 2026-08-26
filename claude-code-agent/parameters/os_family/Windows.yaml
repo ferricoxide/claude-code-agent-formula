@@ -4,13 +4,17 @@ values:
   config:
     managed-settings.d/permissions.json: |-
       {
+        "permissions": {
+          "deny": [
+            "Bash(rm -rf *)"
+          ]
+        }
       }
     root_dir: 'C:\ProgramData\claude-code'
   install_method: 'script'
   install_script:
     creates: 'C:\Program Files\Claude Code\claude.exe'
-    env:
-      CLAUDE_INSTALL_DIR: 'C:\Program Files\Claude Code'
+    env: {}
     skip_verify: true
     source: 'https://claude.ai/install.ps1'
     target: 'C:\Windows\Temp\install_claude.ps1'
