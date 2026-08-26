@@ -4,8 +4,8 @@
 {%- from tplroot ~ "/map.jinja" import mapdata as claude_code_agent
       with context %}
 {%- if claude_code_agent.install_method == 'script' %}
-  {%- set paths = claude_code_agent.path %}
-  {%- set script_cfg = claude_code_agent.install_script %}
+{%-   set paths = claude_code_agent.path %}
+{%-   set script_cfg = claude_code_agent.install_script %}
 
 Download Claude Code Install Script:
   file.managed:
@@ -22,26 +22,17 @@ Execute Claude Code Install Script:
 {%- endif %}
     - name: >-
         powershell -ExecutionPolicy Bypass -File
-        "{{ script_cfg.target }}";
-        $sys_bin = "$env:SystemRoot\System32\config\" +
-        "systemprofile\.local\bin\claude.exe";
-        $sys_share = "$env:SystemRoot\System32\config\" +
-        "systemprofile\.local\share\claude";
-        $target_dir = '{{ paths.global_share }}';
-        if (Test-Path $sys_bin) {
-          if (-not (Test-Path $target_dir)) {
-            New-Item -ItemType Directory -Force
-            -Path $target_dir | Out-Null;
-          }
-          Copy-Item -Path "$sys_bin"
-          -Destination "$target_dir\claude.exe" -Force;
-          if (Test-Path $sys_share) {
-            Copy-Item -Path "$sys_share"
-            -Destination "$target_dir\share"
-            -Recurse -Force;
-          }
-        }
+        "C:\Windows\Temp\install_claude_helper.ps1"
+        -InstallScriptPath "{{ script_cfg.target }}"
+        -InstallRoot "{{ paths.global_share }}"
     - require:
       - file: Download Claude Code Install Script
+      - file: Stage Claude Code Helper Script
     - shell: powershell
+
+Stage Claude Code Helper Script:
+  file.managed:
+    - makedirs: true
+    - name: 'C:\Windows\Temp\install_claude_helper.ps1'
+    - source: salt://claude-code-agent/files/install_claude_helper.ps1
 {%- endif %}
