@@ -4,8 +4,8 @@
 {%- from tplroot ~ "/map.jinja" import mapdata as claude_code_agent
       with context %}
 {%- if claude_code_agent.install_method == 'script' %}
-{%-   set paths = claude_code_agent.path %}
-{%-   set script_cfg = claude_code_agent.install_script %}
+  {%- set paths = claude_code_agent.path %}
+  {%- set script_cfg = claude_code_agent.install_script %}
 
 Download Claude Code Install Script:
   file.managed:
