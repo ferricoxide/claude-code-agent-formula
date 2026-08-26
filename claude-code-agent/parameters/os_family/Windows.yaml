@@ -1,0 +1,19 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+values:
+  config:
+    managed-settings.d/permissions.json: |-
+      {
+      }
+    root_dir: 'C:\ProgramData\claude-code'
+  install_method: 'npm'
+  path:
+    global_bin: 'C:\Program Files\nodejs\claude.cmd'
+    global_share: 'C:\Program Files\Claude Code'
+    node_modules: 'C:\Program Files\nodejs\node_modules'
+  pkg:
+    deps: []
+    nodejs:
+      name: 'nodejs'
+    npm:
+      name: '@anthropic-ai/claude-code'
