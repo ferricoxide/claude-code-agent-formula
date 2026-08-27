@@ -4,7 +4,7 @@
 # Claude Code Agent Formula Pillar Configuration Example
 # ==============================================================================
 
-claude-code-agent:
+claude-code-tui:
   # ============================================================================
   # MANAGED AGENT CONFIGURATION DIRECTIVES (config)
   # ============================================================================
