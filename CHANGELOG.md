@@ -1,4 +1,4 @@
-## claude-code-agent-formula
+## claude-code-tui-formula
 
 All notable changes to this project will be documented in this file.
 
@@ -15,7 +15,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
     *   Configures system environment and shell integration:
         *   Dynamically maps Public Desktop and Start Menu shortcuts (`Claude Code.lnk`) based on selected installation method (`claude.exe` vs `claude.cmd`).
         *   Manages system `PATH` and ACL hardening (`BUILTIN\Users` read/execute) for script installs.
-    *   Installs the Claude Code coding-agent configuration files under `C:\ProgramData\claude-code\managed-settings.json` and `C:\ProgramData\claude-code\managed-settings.d`.
+    *   Installs the Claude Code coding-tui configuration files under `C:\ProgramData\claude-code\managed-settings.json` and `C:\ProgramData\claude-code\managed-settings.d`.
     *   Implements Windows cleanup states (`win_clean.sls`) to cleanly remove shortcuts, package registrations, binary directories, and configuration trees.
 
 ### 0.1.0
@@ -23,12 +23,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 **Released**: 2026.08.25
 
 *   Added ("Enterprise") Linux functionality
-    *   Installs the Claude Code coding-agent binaries.
+    *   Installs the Claude Code coding-tui binaries.
         *   `npm` method installs binaries to `/usr/local/bin`
         *   `rpm` method installs binaries to `/usr/bin`
         *   `script` method installs binaries to `/usr/local/bin`
         Note: Installed version for `npm` and `script` methods typically run a few point-releases ahead of the version installed using the `rpm` method
-    *   Installs the Claude Code coding-agent configuration-files. Default config-file location is `/etc/claude-code/managed-settings.json`. Config-file location, contents and  whether to use a consolidated config-file or individual files in (`/etc/claude-code.d`) are Pillar-selectable.
+    *   Installs the Claude Code coding-tui configuration-files. Default config-file location is `/etc/claude-code/managed-settings.json`. Config-file location, contents and  whether to use a consolidated config-file or individual files in (`/etc/claude-code.d`) are Pillar-selectable.
     *   Implements "cleanup" for all of the preceeding
 *   Adds pillar.example to explain parameters/inputs that may be specified via Pillar
 
@@ -39,11 +39,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 **Summary**:
 
 *   Cloned project from https://github.com/plus3it/repo-template
-*   Created claude-code-agent directory-tree contents by:
+*   Created claude-code-tui directory-tree contents by:
     1.   Cloning https://github.com/saltstack-formulas/template-formula.git
-    2.   Executing `bin/convert-formula.sh claude-code-agent` in the new repo-copy
-    3.   Moving the resulting `claude-code-agent` directory into this project's space
-    4.   Updating all imports from "`claude__code__agent`" to "`claude_code_agent`"
+    2.   Executing `bin/convert-formula.sh claude-code-tui` in the new repo-copy
+    3.   Moving the resulting `claude-code-tui` directory into this project's space
+    4.   Updating all imports from "`claude__code__tui`" to "`claude_code_tui`"
 *   Update [LICENSE](LICENSE), CHANGELOG.md (this file), [README.md](README.md) and [.bumpversion.cfg](.bumpversion.cfg) per the P3 repo-template guidance
 *   Update the `.github` and `tests` directories' contents  per the P3 repo-template guidance
 

@@ -18,9 +18,9 @@ jobs:
           - 8
           - 9
         salt_state:
-          - claude-code-agent
+          - claude-code-tui
         salt_pillar_root:
-          - ./tests/pillar/claude-code-agent
+          - ./tests/pillar/claude-code-tui
     with:
       salt-os-version: ${{ matrix.os_version }}
       salt-state: ${{ matrix.salt_state }}
@@ -34,9 +34,9 @@ jobs:
           - windows-2022
           - windows-2025
         salt_state:
-          - claude-code-agent
+          - claude-code-tui
         salt_pillar_root:
-          - ./tests/pillar/claude-code-agent
+          - ./tests/pillar/claude-code-tui
     with:
       salt-os-version: ${{ matrix.os_version }}
       salt-state: ${{ matrix.salt_state }}

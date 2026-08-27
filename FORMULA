@@ -1,4 +1,4 @@
-name: claude_code
+name: claude_code_tui
 os: RedHat, CentOS, Oracle Enterprise, AlmaLinux, Rocky, Windows
 os_family: RedHat, Windows
 version: 0.1.1
@@ -6,4 +6,4 @@ release: 1
 minimum_version: 3007.13
 summary: Salt Formula to install Claude Code on RHEL and Windows Server targets
 description: Installs and manages Claude Code CLI on RHEL-based Linux and Windows Server target hosts
-top_level_dir: claude_code_agent
+top_level_dir: claude_code_tui
